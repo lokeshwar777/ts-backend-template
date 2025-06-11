@@ -13,7 +13,7 @@ touch README.md src/server.ts .env .env.sample .gitignore .prettierrc .prettieri
 ```bash
 npm init -y
 
-npm i -DE typescript @types/node tsx prettier eslint-config-prettier eslint-plugin-prettier husky lint-staged 
+npm i -DE typescript @types/node tsx prettier eslint-config-prettier eslint-plugin-prettier husky lint-staged
 ```
 
 ## ⚙️ Configuration Files
@@ -28,17 +28,17 @@ Update:
 
 ```jsonc
 {
-  "compilerOptions": {
-    "target": "ES2024",
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
-    "rootDir": "./src",
-    "outDir": "./dist",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true
-  }
+	"compilerOptions": {
+		"target": "ES2024",
+		"module": "NodeNext",
+		"moduleResolution": "nodenext",
+		"rootDir": "./src",
+		"outDir": "./dist",
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"skipLibCheck": true,
+	},
 }
 ```
 
@@ -46,11 +46,11 @@ Update:
 
 ```json
 {
-    "experimentalTernaries": true,
-    "tabWidth": 4,
-    "useTabs": true,
-    "jsxSingleQuote":true,
-    "singleAttributePerLine":true
+	"experimentalTernaries": true,
+	"tabWidth": 4,
+	"useTabs": true,
+	"jsxSingleQuote": true,
+	"singleAttributePerLine": true
 }
 ```
 
@@ -95,73 +95,73 @@ insert_final_newline = true
 > javascript + problems + ESM + TS + node + gfm + npm
 
 ```bash
-npm init @eslint/config@latest 
+npm init @eslint/config@latest
 ```
 
 Update:
 
 ```js
-import js from '@eslint/js';
-import prettierPlugin from 'eslint-plugin-prettier';
-import { defineConfig } from 'eslint/config';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
+import js from "@eslint/js";
+import prettierPlugin from "eslint-plugin-prettier";
+import { defineConfig } from "eslint/config";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
 export default defineConfig([
- // Common JS & TS rules
- {
-  files: ['**/*.{js,mjs,cjs,ts,mts,cts}'],
-  languageOptions: {
-   globals: globals.node,
-  },
-  plugins: {
-   js,
-   prettier: prettierPlugin,
-  },
-  rules: {
-   ...js.configs.recommended.rules,
-   'no-constant-condition': 'error',
-   'no-unreachable': 'error',
-   'no-duplicate-case': 'error',
-   'no-fallthrough': 'error',
-   'no-cond-assign': 'error',
-   'no-eval': 'error',
-   'no-implied-eval': 'error',
-   'no-new-func': 'error',
-   'no-shadow': 'warn',
-   'no-undef': 'error',
-   'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-   'no-empty-function': 'warn',
-   eqeqeq: ['error', 'always'],
-   curly: 'error',
-   'default-case': 'warn',
-   'prettier/prettier': 'error',
-  },
- },
+	// Common JS & TS rules
+	{
+		files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+		languageOptions: {
+			globals: globals.node,
+		},
+		plugins: {
+			js,
+			prettier: prettierPlugin,
+		},
+		rules: {
+			...js.configs.recommended.rules,
+			"no-constant-condition": "error",
+			"no-unreachable": "error",
+			"no-duplicate-case": "error",
+			"no-fallthrough": "error",
+			"no-cond-assign": "error",
+			"no-eval": "error",
+			"no-implied-eval": "error",
+			"no-new-func": "error",
+			"no-shadow": "warn",
+			"no-undef": "error",
+			"no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+			"no-empty-function": "warn",
+			eqeqeq: ["error", "always"],
+			curly: "error",
+			"default-case": "warn",
+			"prettier/prettier": "error",
+		},
+	},
 
- // TypeScript-specific rules
- {
-  files: ['**/*.{ts,mts,cts}'],
-  plugins: {
-   '@typescript-eslint': tseslint.plugin,
-  },
-  languageOptions: {
-   parser: tseslint.parser,
-   parserOptions: {
-    project: './tsconfig.json',
-    tsconfigRootDir: import.meta.dirname,
-   },
-  },
-  rules: {
-   ...tseslint.configs.strict.rules,
-   ...tseslint.configs.stylistic.rules,
-   '@typescript-eslint/no-explicit-any': 'warn',
-   '@typescript-eslint/explicit-function-return-type': 'warn',
-   '@typescript-eslint/no-floating-promises': 'error',
-   '@typescript-eslint/require-await': 'error',
-   '@typescript-eslint/consistent-type-imports': 'warn',
-  },
- },
+	// TypeScript-specific rules
+	{
+		files: ["**/*.{ts,mts,cts}"],
+		plugins: {
+			"@typescript-eslint": tseslint.plugin,
+		},
+		languageOptions: {
+			parser: tseslint.parser,
+			parserOptions: {
+				project: "./tsconfig.json",
+				tsconfigRootDir: import.meta.dirname,
+			},
+		},
+		rules: {
+			...tseslint.configs.strict.rules,
+			...tseslint.configs.stylistic.rules,
+			"@typescript-eslint/no-explicit-any": "warn",
+			"@typescript-eslint/explicit-function-return-type": "warn",
+			"@typescript-eslint/no-floating-promises": "error",
+			"@typescript-eslint/require-await": "error",
+			"@typescript-eslint/consistent-type-imports": "warn",
+		},
+	},
 ]);
 ```
 
@@ -174,7 +174,7 @@ npx husky init
 Update:
 
 ```bash
-echo "Husky (pre-commit hook) performing linting & formatting on staged files..." 
+echo "Husky (pre-commit hook) performing linting & formatting on staged files..."
 npx lint-staged
 ```
 
@@ -199,21 +199,21 @@ npx lint-staged
 
 ## 📚 References
 
-* [TypeScript Docs](https://www.typescriptlang.org/download/)
-* [ESLint Getting Started](https://eslint.org/docs/latest/use/getting-started)
-* [Prettier Docs](https://prettier.io/docs/install)  
-* [Prettier Plugin](https://github.com/prettier/eslint-config-prettier)  
-* [tsx GitHub](https://github.com/esbuild-kit/tsx)
-* [TypeScript + Node (native)](https://nodejs.org/en/learn/typescript/run-natively)  
-* [ESLint](https://eslint.org/docs/latest/use/getting-started)  
-* [Husky](https://typicode.github.io/husky/get-started.html)  
-* [`tsconfig.json`](https://nodejs.org/api/typescript.html#type-stripping)
+- [TypeScript Docs](https://www.typescriptlang.org/download/)
+- [ESLint Getting Started](https://eslint.org/docs/latest/use/getting-started)
+- [Prettier Docs](https://prettier.io/docs/install)
+- [Prettier Plugin](https://github.com/prettier/eslint-config-prettier)
+- [tsx GitHub](https://github.com/esbuild-kit/tsx)
+- [TypeScript + Node (native)](https://nodejs.org/en/learn/typescript/run-natively)
+- [ESLint](https://eslint.org/docs/latest/use/getting-started)
+- [Husky](https://typicode.github.io/husky/get-started.html)
+- [`tsconfig.json`](https://nodejs.org/api/typescript.html#type-stripping)
 
 <!-- GPT beautified notes -->
 
 <!-- Own Notes start's here -->
 <!-- # Backend App Notes -->
-<!-- ## Commands followed 
+<!-- ## Commands followed
 
 1. `mkdir backend-learn-app`
 2. `cd backend-learn-app/`
@@ -230,18 +230,18 @@ npx lint-staged
 
 ## References
 
-[TS](https://www.typescriptlang.org/download/)  
-[Prettier](https://prettier.io/docs/install)  
-[Prettier Plugin](https://github.com/prettier/eslint-config-prettier)  
-[node](https://nodejs.org/en/learn/typescript/run-natively)  
-[ESLint](https://eslint.org/docs/latest/use/getting-started)  
-[husky](https://typicode.github.io/husky/get-started.html)  
+[TS](https://www.typescriptlang.org/download/)
+[Prettier](https://prettier.io/docs/install)
+[Prettier Plugin](https://github.com/prettier/eslint-config-prettier)
+[node](https://nodejs.org/en/learn/typescript/run-natively)
+[ESLint](https://eslint.org/docs/latest/use/getting-started)
+[husky](https://typicode.github.io/husky/get-started.html)
 [`tsconfig.json`](https://nodejs.org/api/typescript.html#type-stripping)
 -->
 
 <!-- markdownlint-disable MD033 -->
 
-<!-- 
+<!--
 <details><summary><code>.prettierrc</code></summary>
 
 ```json

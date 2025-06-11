@@ -1,1 +1,1 @@
-console.log('loki 777 ')
+console.log("loki 777 ");

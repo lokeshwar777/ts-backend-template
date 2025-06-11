@@ -1,7 +1,7 @@
 {
-    "experimentalTernaries": true,
-    "tabWidth": 4,
-    "useTabs": true,
-    "jsxSingleQuote":true,
-    "singleAttributePerLine":true
+	"experimentalTernaries": true,
+	"tabWidth": 4,
+	"useTabs": true,
+	"jsxSingleQuote": true,
+	"singleAttributePerLine": true
 }
