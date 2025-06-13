@@ -1,11 +1,12 @@
 {
 	"name": "backend-app",
 	"version": "1.0.0",
-	"description": "```bash mkdir src routes controllers middlewares config db",
+	"description": "A complete backend app from scratch.",
 	"main": "index.js",
 	"scripts": {
-		"dev": "tsx src/server.ts",
-		"dev:watch": "tsx watch src/server.ts",
+		"dev": "tsx --env-file=.env src/server.ts",
+		"dev:watch": "tsx watch --env-file=.env src/server.ts",
+		"dev:debug": "tsx watch --inspect --env-file=.env src/server.ts",
 		"build": "tsc",
 		"start": "node dist/server.js",
 		"format": "prettier --write .",
@@ -31,6 +32,7 @@
 	"homepage": "https://github.com/lokeshwar777/backend-app#readme",
 	"devDependencies": {
 		"@eslint/js": "^9.28.0",
+		"@types/express": "^5.0.3",
 		"@types/node": "24.0.0",
 		"eslint": "^9.28.0",
 		"eslint-config-prettier": "10.1.5",
@@ -42,5 +44,8 @@
 		"tsx": "4.20.1",
 		"typescript": "5.8.3",
 		"typescript-eslint": "^8.34.0"
+	},
+	"dependencies": {
+		"express": "^5.1.0"
 	}
 }

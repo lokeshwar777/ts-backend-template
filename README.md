@@ -3,18 +3,27 @@
 ## 📁 Project Structure
 
 ```bash
-mkdir src routes controllers middlewares config db
+mkdir src src/routes src/controllers src/middlewares src/config src/db src/models
 
-touch README.md src/server.ts .env .env.sample .gitignore .prettierrc .prettierignore .editorconfig
+touch README.md src/server.ts src/app.ts .env .env.sample .gitignore .prettierrc .prettierignore .editorconfig
 ```
 
 ## 📦 Install Dependencies & Setups
 
-```bash
-npm init -y
+1. Project init, files & config setup
 
-npm i -DE typescript @types/node tsx prettier eslint-config-prettier eslint-plugin-prettier husky lint-staged
-```
+    ```bash
+    npm init -y
+
+    npm i -DE typescript @types/node tsx prettier eslint-config-prettier eslint-plugin-prettier husky lint-staged
+    ```
+
+2. Express + Middlewares Setup - [ref blog](https://blog.logrocket.com/express-typescript-node/)
+
+    ```bash
+    npm install express --save
+    npm i --save-dev @types/express
+    ```
 
 ## ⚙️ Configuration Files
 
@@ -178,24 +187,135 @@ echo "Husky (pre-commit hook) performing linting & formatting on staged files...
 npx lint-staged
 ```
 
-## 🧪 Scripts in `package.json`
+### 7. `package.json` scripts
 
 ```json
 "type": "module",
 "scripts": {
-  "dev": "tsx src/server.ts",
-  "dev:watch": "tsx watch src/server.ts",
+  "dev": "tsx --env-file=.env src/server.ts",
+  "dev:watch": "tsx watch --env-file=.env src/server.ts",
+  "dev:debug": "tsx watch --inspect --env-file=.env src/server.ts",
   "build": "tsc",
   "start": "node dist/server.js",
   "format": "prettier --write .",
   "lint": "eslint src --ext .ts",
-  "lint:fix": "eslint src --ext .ts --fix"
-},
+  "lint:fix": "eslint src --ext .ts --fix",
+  "prepare": "husky"
+ },
 "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
     "**/*.{ts,tsx,js,jsx}": "eslint --fix"
 },
 ```
+
+### 8. `.vscode/launch.json`
+
+```json
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug: Backend (tsx server.ts)",
+			"type": "node",
+			"request": "launch",
+			"runtimeExecutable": "tsx",
+			"args": ["watch", "--env-file=.env", "src/server.ts"],
+			"cwd": "${workspaceFolder}",
+			"skipFiles": ["<node_internals>/**"]
+		}
+	]
+}
+```
+
+### 9. `create-static-files.sh`
+
+```bash
+#!/bin/bash
+
+# GPT generated
+
+# Create folders
+mkdir -p public/{css,js,data,images,media}
+
+# HTML
+cat > public/index.html <<EOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Static Test</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1>Hello Static World!</h1>
+
+  <img src="/images/logo.png" alt="Logo" width="150" />
+  <img src="/images/photo.jpg" alt="Photo" width="150" />
+  <img src="/images/icon.svg" alt="SVG Icon" width="100" />
+
+  <div id="output"></div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
+EOF
+
+# CSS
+cat > public/css/style.css <<EOF
+body {
+  background-color: #f0f0f0;
+  font-family: sans-serif;
+  text-align: center;
+}
+img {
+  margin: 10px;
+}
+h1 {
+  color: darkblue;
+}
+EOF
+
+# JS
+cat > public/js/app.js <<EOF
+console.log("JS loaded from static!");
+
+document.addEventListener("DOMContentLoaded", () => {
+  const output = document.getElementById("output");
+  output.innerText = "This message was inserted by app.js!";
+});
+EOF
+
+# JSON
+cat > public/data/data.json <<EOF
+{
+  "name": "Loki",
+  "role": "Developer"
+}
+EOF
+
+# SVG
+cat > public/images/icon.svg <<EOF
+<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100">
+  <circle cx="50" cy="50" r="40" stroke="black" stroke-width="3" fill="red" />
+</svg>
+EOF
+
+# Download real assets
+curl -o public/images/logo.png https://dummyimage.com/150x150/000/fff.png\&text=Logo
+curl -o public/images/photo.jpg https://dummyimage.com/200x100/aaa/000.jpg\&text=Photo
+curl -o public/media/resume.pdf https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf
+curl -o public/media/song.mp3 https://file-examples.com/storage/fe740ac4e1bbf0134e1fa0e/2017/11/file_example_MP3_700KB.mp3
+curl -o public/media/video.mp4 https://file-examples.com/storage/fe740ac4e1bbf0134e1fa0e/2018/04/file_example_MP4_640_3MG.mp4
+curl -o public/favicon.ico https://www.google.com/favicon.ico
+
+echo "✅ All static files organized and created in ./public"
+```
+
+## Steps
+
+1. Project initialisation, files setup & config
+2. Debugger & environment variables setup
+3. Express & middleware setup with test routes for various file types
 
 ## 📚 References
 
@@ -208,6 +328,7 @@ npx lint-staged
 - [ESLint](https://eslint.org/docs/latest/use/getting-started)
 - [Husky](https://typicode.github.io/husky/get-started.html)
 - [`tsconfig.json`](https://nodejs.org/api/typescript.html#type-stripping)
+- [Express Docs](https://expressjs.com/en/5x/api.html)
 
 <!-- GPT beautified notes -->
 
