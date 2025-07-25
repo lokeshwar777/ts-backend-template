@@ -18,13 +18,17 @@ export default class APIError extends Error {
 		details?: unknown,
 	) {
 		super(message);
-		this.name = "APIError";
+		this.name = this.constructor.name; // constructor.name is same as class name
 		this.statusCode = statusCode;
 		this.errorCode = errorCode;
 		this.details = details;
 
 		// fixes prototye chain
 		Object.setPrototypeOf(this, APIError.prototype);
+
+		// skips internal constructor calls (intermediate nodes)
+		// shows only src(error origin) & dest(catch block / logger)
+		Error.captureStackTrace(this, this.constructor);
 	}
 
 	toJSON() {
@@ -34,7 +38,8 @@ export default class APIError extends Error {
 			name: this.name,
 			message: this.message,
 			statusCode: this.statusCode,
-			...(this.errorCode && { errorCode: this.errorCode }), // truthy check
+            errorCode: this.errorCode ?? "INTERNAL_ERROR",
+			...(this.details && { details: this.details }), // truthy check (or)
 			...(typeof this.details === "object" && this.details !== null
 				? { details: this.details }
 				: {}), // safer, cleaner, explicit
@@ -45,11 +50,9 @@ export default class APIError extends Error {
 			name: this.name,
 			message: this.message,
 			statusCode: this.statusCode,
+			errorCode: this.errorCode ?? "INTERNAL_ERROR",
 		};
 
-		if (this.errorCode) {
-			errorPayload.errorCode = this.errorCode;
-		}
 		if (this.details) {
 			errorPayload.details = this.details;
 		}

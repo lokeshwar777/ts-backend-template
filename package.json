@@ -1,7 +1,7 @@
 {
-	"name": "backend-app",
+	"name": "ts-backend-template",
 	"version": "1.0.0",
-	"description": "A complete backend app from scratch.",
+	"description": "A complete backend app template from scratch.",
 	"main": "index.js",
 	"scripts": {
 		"dev": "tsx --env-file=.env src/server.ts",
@@ -20,16 +20,16 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/lokeshwar777/backend-app.git"
+		"url": "git+https://github.com/lokeshwar777/ts-backend-template.git"
 	},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
 	"type": "module",
 	"bugs": {
-		"url": "https://github.com/lokeshwar777/backend-app/issues"
+		"url": "https://github.com/lokeshwar777/ts-backend-template/issues"
 	},
-	"homepage": "https://github.com/lokeshwar777/backend-app#readme",
+	"homepage": "https://github.com/lokeshwar777/ts-backend-template#readme",
 	"devDependencies": {
 		"@eslint/js": "^9.28.0",
 		"@types/express": "^5.0.3",
@@ -46,6 +46,7 @@
 		"typescript-eslint": "^8.34.0"
 	},
 	"dependencies": {
-		"express": "^5.1.0"
+		"express": "^5.1.0",
+		"mongoose": "^8.15.2"
 	}
 }

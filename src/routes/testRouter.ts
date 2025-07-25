@@ -1,6 +1,10 @@
 import { Router } from "express";
 import path from "path";
-import { __dirname } from "../config/constants.js";
+import { __dirname } from "../constants/index.js";
+import {
+	echoHandler,
+	testAsyncHanlder,
+} from "../controllers/test.controller.js";
 
 const router = Router();
 
@@ -8,10 +12,22 @@ router.get("/", (req, res) => {
 	res.send("This is test page");
 });
 
-router.post("/json", (req, res) => {
-	console.log("form req.body", req.body, req.headers["content-type"]);
-	res.send(`Received JSON: ${JSON.stringify(req.body)}`);
-});
+router.get("/echo", echoHandler);
+
+router.get("/async-handler", testAsyncHanlder);
+
+router
+	.route("/json")
+	.get((_, res) => {
+		const someJsonData = {
+			name: "Loki",
+		};
+		res.json(someJsonData);
+	})
+	.post((req, res) => {
+		console.log("form req.body", req.body, req.headers["content-type"]);
+		res.send(`Received JSON: ${JSON.stringify(req.body)}`);
+	});
 
 router.post("/form-plain", (req, res) => {
 	console.log("form req.body", req.body, req.headers["content-type"]);
@@ -31,6 +47,8 @@ router.post("/form-nested", (req, res) => {
 	res.send(`Received form: ${JSON.stringify(req.body)}`);
 });
 
+// AI generated starts here
+
 // 🔹 HTML string (res.send)
 router.get("/send-html", (req, res) => {
 	res.send(`<h2>Hello from <code>res.send()</code>!</h2>`);
@@ -45,13 +63,6 @@ router.get("/send-text", (req, res) => {
 router.get("/send-json", (req, res) => {
 	res.send({ status: "success", message: "JSON via res.send()" });
 });
-
-// 🔹 JSON via res.json
-router.get("/json", (req, res) => {
-	res.json({ name: "Loki", language: "JavaScript" });
-});
-
-// GPT generated starts here
 
 // 🔹 Serve specific HTML file
 router.get("/file-html", (req, res) => {

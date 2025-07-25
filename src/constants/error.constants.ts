@@ -1,4 +1,4 @@
-import APIError from "./APIError.js";
+import APIError from "../utils/APIError.js";
 
 export const ERRORS = {
 	UNAUTHORIZED: new APIError("Unauthorized", 401, "UNAUTHORIZED"),

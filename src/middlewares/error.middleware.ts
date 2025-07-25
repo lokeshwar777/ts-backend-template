@@ -4,9 +4,9 @@ import type {
 	NextFunction,
 	ErrorRequestHandler,
 } from "express";
-import APIError from "../errors/APIError.js";
+import APIError from "../utils/APIError.js";
 
-export const ErrorHandler: ErrorRequestHandler = (
+export const globalErrorHandler: ErrorRequestHandler = (
 	err: unknown,
 	req: Request,
 	res: Response,
