@@ -3,7 +3,7 @@
 ## Project Structure
 
 ```bash
-mkdir src src/config src/constants src/routes src/controllers src/db src/middlewares src/models src/routes src/schemas src/utils types
+mkdir src src/config src/constants src/routes src/controllers src/db src/logger src/middlewares src/models src/routes src/schemas src/utils types
 
 touch README.md src/server.ts src/app.ts .env .env.sample .gitignore .prettierrc .prettierignore .editorconfig
 ```

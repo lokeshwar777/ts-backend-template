@@ -5,6 +5,7 @@ import type {
 	Response,
 } from "express";
 import APIError from "../utils/APIError.js";
+import { logger } from "../logger/index.js";
 
 export const jsonErrorResponder: ErrorRequestHandler = (
 	err: unknown,
@@ -25,7 +26,7 @@ export const jsonErrorResponder: ErrorRequestHandler = (
 			? err
 			: new APIError("something went wrong on client!");
 
-	console.error("client-side error", apiError); // helpful for debugging
+	logger.error("client-side error", apiError); // helpful for debugging
 
 	res.status(apiError.statusCode).json(apiError.toJSON());
 };

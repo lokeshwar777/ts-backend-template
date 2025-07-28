@@ -1,22 +1,38 @@
-import type {
-	ErrorRequestHandler,
-	NextFunction,
-	Request,
-	Response,
-} from "express";
+import type { ErrorRequestHandler, NextFunction, Request } from "express";
+import APIError from "../utils/APIError.js";
+// import { logger } from "../logger/index.js";
 
 export const logErrors: ErrorRequestHandler = (
 	err: unknown,
 	req: Request,
-	res: Response,
+	_,
 	next: NextFunction,
 ) => {
-	if (err instanceof Error) {
+	// if not using `pino-http`
+	// const reqLogger = logger.child({ url: req.url, method: req.method });
+
+	const reqLogger = req?.log; // comes from `pino-http`
+
+	if (!reqLogger) {
+		console.error("Logger is missing!!!");
+		console.error(err);
+		return next();
+	}
+
+	if (err instanceof APIError) {
+		reqLogger.error(
+			{ message: err.message, statusCode: err.statusCode },
+			"[API Error]",
+		);
+	} else if (err instanceof Error) {
 		// log full error stack tree if present
-		console.error(`[Error Log] :-> ${err.stack}`);
+		reqLogger.error(
+			{ name: err.name, stack: err.stack },
+			"[Unhandled Error]",
+		);
 	} else {
 		// simply log error
-		console.error(`[Error] :-> ${err}`);
+		reqLogger.error({ error: String(err) }, "[Unknown Error]");
 	}
 	next(err); // pass error to next middleware
 };
