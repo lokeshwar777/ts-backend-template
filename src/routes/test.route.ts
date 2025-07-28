@@ -1,10 +1,7 @@
 import { Router } from "express";
 import path from "path";
 import { __dirname } from "../constants/index.js";
-import {
-	echoHandler,
-	testAsyncHanlder,
-} from "../controllers/test.controller.js";
+import { testHandlers } from "../controllers/test.controller.js";
 
 const router = Router();
 
@@ -12,9 +9,9 @@ router.get("/", (req, res) => {
 	res.send("This is test page");
 });
 
-router.get("/echo", echoHandler);
+router.get("/echo", testHandlers.echoHandler);
 
-router.get("/async-handler", testAsyncHanlder);
+router.get("/async-handler", testHandlers.testAsyncHanlder);
 
 router
 	.route("/json")

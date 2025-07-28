@@ -24,7 +24,7 @@ const loginSchema = z
 		path: ["email"],
 	});
 
-type registerInput = z.infer<typeof registerSchema>;
-type loginInput = z.infer<typeof loginSchema>;
+type RegisterInput = z.infer<typeof registerSchema>;
+type LoginInput = z.infer<typeof loginSchema>;
 
-export { registerSchema, loginSchema, registerInput, loginInput };
+export { registerSchema, loginSchema, RegisterInput, LoginInput };

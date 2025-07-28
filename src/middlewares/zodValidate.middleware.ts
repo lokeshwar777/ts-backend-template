@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import z from "zod";
-import { ERRORS } from "../constants/error.constants.js";
+import { ERRORS } from "../constants/index.js";
 
 const zodValidator =
 	(schema: z.ZodType) => (req: Request, _: Response, next: NextFunction) => {

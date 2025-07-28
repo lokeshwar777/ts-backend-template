@@ -4,14 +4,14 @@ export enum Role {
 	GUEST = "GUEST",
 }
 
-export interface User {
+export interface IUser {
 	readonly id: string;
-	fullName: string;
-	username: string;
-	email: string;
-	password: string;
-	role: Role;
-	isVerified: boolean;
-	createdAt: Date;
-	updatedAt: Date;
+	// fullName: string;
+	// username: string;
+	// email: string;
+	// password: string;
+	// role: Role;
+	// isVerified: boolean;
+	// createdAt: Date;
+	// updatedAt: Date;
 }

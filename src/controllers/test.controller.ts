@@ -51,4 +51,4 @@ const testAsyncHanlder = asyncHandler(async (req: Request, res: Response) => {
 	// })
 });
 
-export { echoHandler, testAsyncHanlder };
+export const testHandlers = { echoHandler, testAsyncHanlder };
