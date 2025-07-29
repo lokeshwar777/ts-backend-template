@@ -1,3 +1,3 @@
-export interface AuthResponse {}
+export interface IAuthResponse {}
 
 // JWT payload

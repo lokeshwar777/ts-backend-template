@@ -27,7 +27,7 @@ export default defineConfig([
 			"no-new-func": "error",
 			"no-shadow": "warn",
 			"no-undef": "error",
-			"no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
+			"no-unused-vars": "off",
 			"no-empty-function": "warn",
 			eqeqeq: ["error", "always"],
 			curly: "error",

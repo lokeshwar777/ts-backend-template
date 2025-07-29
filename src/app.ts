@@ -7,6 +7,7 @@ import { jsonErrorResponder } from "./middlewares/jsonErrorResponder.js";
 import { PORT } from "./constants/index.js";
 import { pinoHttp } from "pino-http";
 import { logger } from "./logger/index.js";
+import type { Server } from "node:http";
 // import methodOverride from "method-override"; // use if needed
 
 const app = express();
@@ -39,7 +40,8 @@ app.use(logErrors); // use if needed
 app.use(jsonErrorResponder); // use if needed to handle client side JSON errors
 app.use(globalErrorHandler); // handle HTML & non-JSON errors
 
-const startServer = () =>
+// can be used for graceful shudowns
+const startServer = (): Server =>
 	app.listen(PORT, () => {
 		logger.debug(`🌐 Express server running at http://localhost:${PORT}`);
 	});

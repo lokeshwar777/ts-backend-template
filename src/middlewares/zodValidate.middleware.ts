@@ -3,7 +3,8 @@ import z from "zod";
 import { ERRORS } from "../constants/index.js";
 
 const zodValidator =
-	(schema: z.ZodType) => (req: Request, _: Response, next: NextFunction) => {
+	(schema: z.ZodType) =>
+	(req: Request, _: Response, next: NextFunction): void => {
 		const result = schema.safeParse(req.body);
 		if (result.success) {
 			return next();

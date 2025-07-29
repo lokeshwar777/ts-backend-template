@@ -1,6 +1,5 @@
 import type { Request, RequestHandler, Response } from "express";
 import asyncHandler from "../utils/asyncHandler.js";
-import { resolve } from "path";
 import APIError from "../utils/APIError.js";
 import APIResponse from "../utils/APIResponse.js";
 

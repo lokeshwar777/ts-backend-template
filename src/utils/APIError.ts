@@ -31,7 +31,7 @@ export default class APIError extends Error {
 		Error.captureStackTrace(this, this.constructor);
 	}
 
-	toJSON() {
+	toJSON(): SerialisedAPIError {
 		// approach 1 (concise but not clean)
 		/*
 		return {
