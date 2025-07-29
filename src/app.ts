@@ -41,7 +41,7 @@ app.use(globalErrorHandler); // handle HTML & non-JSON errors
 
 const startServer = () =>
 	app.listen(PORT, () => {
-		logger.info(`🌐 Express server running at http://localhost:${PORT}`);
+		logger.debug(`🌐 Express server running at http://localhost:${PORT}`);
 	});
 
 export default startServer;

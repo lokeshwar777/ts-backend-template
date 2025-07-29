@@ -1,14 +1,9 @@
 import type { LoggerOptions } from "pino";
+import { LOG_LEVEL } from "../constants/index.js";
 
 const loggerConfig: LoggerOptions = {
 	// customLevels: {loki: 777}, // logger.loki()
-	level:
-		process.env.PINO_LOG_LEVEL ||
-		(process.env.NODE_ENV === "production" ? "info" : "debug"),
-
-	formatters: {
-		level: (label) => ({ level: label.toUpperCase() }),
-	},
+	level: LOG_LEVEL,
 
 	// use for abstraction
 	/*
@@ -18,7 +13,7 @@ const loggerConfig: LoggerOptions = {
 	},
     */
 
-	timestamp: () => `,"time":"${new Date().toISOString()}"`,
+	// timestamp: () => `,"time":"${new Date().toISOString()}"`,
 };
 
 export { loggerConfig };
