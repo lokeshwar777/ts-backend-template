@@ -13,5 +13,11 @@ export const ERRORS = {
 			fieldErrors,
 		),
 
+	INTERNAL_SERVER_ERROR: new APIError(
+		"Internal Server Error",
+		500,
+		"INTERNAL_SERVER_ERROR",
+	),
+
 	// TODO : add more
 };

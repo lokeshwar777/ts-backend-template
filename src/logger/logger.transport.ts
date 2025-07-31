@@ -1,14 +1,13 @@
 import path from "path";
 import type { DestinationStream, TransportTargetOptions } from "pino";
 import { pino } from "pino";
-import { LOG_LEVEL } from "../constants/index.js";
+import { isProd, LOG_LEVEL } from "../constants/index.js";
 
 const __dirname = import.meta.dirname;
 const absoluteLogFilePath = path.normalize(
 	path.join(__dirname, "..", "logs", "output.log"),
 );
 
-const isProd = process.env.NODE_ENV === "production";
 const target: string = isProd ? "pino/file" : "pino-pretty";
 
 // output logs to log file (`output.log`)

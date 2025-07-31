@@ -1,15 +1,25 @@
-import type { Request, Response, ErrorRequestHandler } from "express";
+import type {
+	Request,
+	Response,
+	ErrorRequestHandler,
+	NextFunction,
+} from "express";
 import APIError from "../utils/APIError.js";
+import { ERRORS } from "../constants/index.js";
 
 export const globalErrorHandler: ErrorRequestHandler = (
 	err: unknown,
 	req: Request,
 	res: Response,
+	next: NextFunction,
 ): void => {
-	if (err instanceof APIError) {
-		res.status(err.statusCode).json(err.toJSON());
-		return;
-	}
-	console.log(`Unhandled error :-> ${err}`);
-	res.status(500).json({ error: "Internal Server Error" });
+	const error = err instanceof APIError ? err : ERRORS.INTERNAL_SERVER_ERROR;
+
+	// inject error so that pino-http can recognise it
+	res.err = error;
+
+	// optional logging for safety but redundancy
+	// req.log.error(error, `Error : ${error.name} - ${error.message}`);
+
+	res.status(error.statusCode).json(error.toJSON());
 };
